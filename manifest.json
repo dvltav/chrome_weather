@@ -1,0 +1,14 @@
+{
+  "name": "Belmont weather station",
+  "description": "Change browser action color when its icon is clicked",
+  "version": "1.2",
+  "background": { "scripts": ["background.js"] },
+  "permissions": [
+    "tabs", "http://*/*", "alarms", "https://secure.flickr.com/"
+  ],
+  "browser_action": {
+      "name": "Click to change the icon's color",
+	  "default_popup": "popup.html"
+  },
+  "manifest_version": 2
+}
