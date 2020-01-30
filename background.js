@@ -41,8 +41,11 @@ function getWeather() {
     if (this.status == 200) {
       console.log('weather =' + this.responseText);
       var obj = JSON.parse(this.responseText);
-      let temp = ~~obj[0].outTemp;
-      chrome.browserAction.setBadgeText({text: String(temp)});  
+      let temp = obj[0].outTemp;
+      let tempYesterday = temp - obj[0].outTempYesterday;
+      //r = Math.round( tempYesterday * 10 ) / 10 ;
+      s = Math.round(temp)  + "/" + Math.round(tempYesterday);
+      chrome.browserAction.setBadgeText({text: s});  
 
       updateIcon(temp);
     } 
