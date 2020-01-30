@@ -6,7 +6,7 @@ var min = 1;
 var max = 5;
 var current = min;
 
-function updateIcon() {
+function updateIcon(temp) {
   chrome.browserAction.setIcon({path:"icon" + current + ".png"});
   current++;
   if (current > max)
@@ -34,13 +34,17 @@ function onWatchdog() {
 }
 
 function getWeather() {
-    var url = "http://vltavsky.com:500/outTempOne.php";
+    var url = "http://192.168.1.35:8080/api/weather_now";
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET', url, true);
 	xhr.onload = function(e) {
     if (this.status == 200) {
       console.log('weather =' + this.responseText);
-	  chrome.browserAction.setBadgeText({text: this.responseText});
+      var obj = JSON.parse(this.responseText);
+      let temp = ~~obj[0].outTemp;
+      chrome.browserAction.setBadgeText({text: String(temp)});  
+
+      updateIcon(temp);
     } 
 	else 
 	{
@@ -61,4 +65,4 @@ chrome.browserAction.onClicked.addListener(updateIcon);
 chrome.alarms.onAlarm.addListener(onWatchdog);
 chrome.alarms.create('watchdog', {periodInMinutes:5});
 getWeather();
-updateIcon();
+
