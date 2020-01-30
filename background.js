@@ -42,10 +42,16 @@ function getWeather() {
       console.log('weather =' + this.responseText);
       var obj = JSON.parse(this.responseText);
       let temp = obj[0].outTemp;
-      let tempYesterday = temp - obj[0].outTempYesterday;
+      let tempYesterday = Math.round(temp - obj[0].outTempYesterday);
       //r = Math.round( tempYesterday * 10 ) / 10 ;
-      s = Math.round(temp)  + "/" + Math.round(tempYesterday);
+      s = Math.round(temp)  + "/" + tempYesterday;
       chrome.browserAction.setBadgeText({text: s});  
+      if (tempYesterday > 0) {
+        chrome.browserAction.setBadgeBackgroundColor({color: "#cc2900"}); //   ""
+      } else {
+        chrome.browserAction.setBadgeBackgroundColor({color: "#0073e6"}); 
+      }
+      chrome.browserAction.setTitle({title: s});
 
       updateIcon(temp);
     } 
