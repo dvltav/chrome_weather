@@ -4,7 +4,7 @@
   "version": "1.3",
   "background": { "scripts": ["background.js"] },
   "permissions": [
-    "tabs", "http://*/*", "alarms", "https://secure.flickr.com/"
+    "tabs", "idle","notifications","contextMenus","http://*/*", "alarms", "https://secure.flickr.com/"
   ],
   "browser_action": {
       "name": "Click to change the icon's color",
