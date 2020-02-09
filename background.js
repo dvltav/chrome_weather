@@ -2,10 +2,12 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+
 var min = 1;
 var max = 5;
 var current = min;
-var windMax = 3;
+var windMax = 10;
+var disableNotifications = false;
 
 function onClickNotification(){
   var newURL = "http://cs1.pixelcaster.com/yosemite/yosfalls.jpg";
@@ -28,6 +30,17 @@ function updateIcon(temp) {
     current = min;
 	console.log('COLOR ' + Date.now());
 	**/  
+}
+
+function restore_options() {
+    console.log("restore_options");
+    chrome.storage.sync.get({
+    windGust: windMax,
+    disable: false
+  }, function(items) {
+    windMax = items.windGust;
+    disableNotifications = items.disable;
+  });
 }
 
 function onWatchdog() {
@@ -144,5 +157,8 @@ chrome.alarms.onAlarm.addListener(onWatchdog);
 chrome.alarms.create('watchdog', {periodInMinutes:1});
 chrome.notifications.onClicked.addListener(onClickNotification);
 chrome.idle.onStateChanged.addListener(onStateActive);
+restore_options();
 getWeather();
+chrome.storage.onChanged.addListener(function(changes, namespace) {restore_options();});
+
 
