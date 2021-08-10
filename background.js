@@ -142,11 +142,13 @@ function drawCanvasIcon(temp, tempYesterday) {
 
 function yosemiteNotification(){
       //https://cs1.pixelcaster.com/yosemite/yosfalls.jpg
+      url = 'https://pixelcaster.com/yosemite/webcams/ahwahnee2.jpg'
     
+      
       chrome.notifications.create( {
         type: 'image',
-         iconUrl: 'http://cs1.pixelcaster.com/yosemite/yosfalls.jpg',
-         imageUrl: 'http://cs1.pixelcaster.com/yosemite/yosfalls.jpg',
+         iconUrl: url,
+         imageUrl: url,
         title: 'Yosfalls',
         message: 'Yosfalls'
      });
