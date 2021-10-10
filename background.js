@@ -49,7 +49,7 @@ function onWatchdog() {
 }
 
 function getWeather() {
-  var url = "http://192.168.1.35:8080/api/weather_now";
+  var url = "http://192.168.1.35:8080/express/weather/weather_now";
 	var xhr = new XMLHttpRequest();
 	
   xhr.open('GET', url, true);
